@@ -32,7 +32,8 @@ char *progname;
  * model:   you can find on the hardware, look for M/N: ...
  * csr:           mouse with receiver (wireless)
  * res:           mouse has resolution control
- * sms:           mouse has smart control
+ * ssr:           mouse has smart scroll reporting
+ * sms:           mouse has smart scroll
  * dual:    dual receiver (wireless mouse+wireless keyboard)
  *
  *   product id,  name,                                        model,    csr, res, ssr, sms, dual */
@@ -52,12 +53,13 @@ mouse_t mice [] = {
       {0xc07c, "G700s Rechargeable Gaming Mouse",            "M-R0017",     0, 1, 1, 1, 0},
       {0xc501, "Mouse Receiver",                             "C-BA4-MSE",   1, 0, 0, 0, 0},
       {0xc502, "Dual Receiver",                              "C-UA3-DUAL",  1, 0, 0, 0, 1},
-      {0xc503, "Receiver for MX900 Receiver",                "C-UJ16A",     1, 0, 0, 1, 0},
+      {0xc503, "Receiver for MX900",                         "C-UJ16A",     1, 0, 0, 1, 0},
       {0xc504, "Receiver for Cordless Freedom Optical",      "C-BD9-DUAL",  1, 0, 0, 0, 1},
       {0xc505, "Receiver for Cordless Elite Duo",            "C-BG17-DUAL", 1, 0, 0, 0, 1},
       {0xc506, "Receiver for MX700 Optical Mouse",           "C-BF16-MSE",  1, 0, 0, 1, 0},
       {0xc508, "Receiver for Cordless Optical TrackMan",     "C-BA4-MSE",   1, 0, 0, 1, 0},
       {0xc50a, "Receiver for Cordless Optical Mouse for Notebooks", "C-BJ27-MSE",  1, 0, 0, 1, 0},
+      {0xc50b, "Receiver for Cordless Desktop MX",           "C-BK16A-DUAL",1, 0, 0, 1, 1},
       {0xc50e, "Receiver for MX1000 Laser",                  "C-BN34",      1, 0, 1, 1, 0},
       {0xc512, "Receiver for Cordless Desktop MX3100 Laser", "C-BO34",      1, 0, 0, 1, 1},
       {0xc525, "Receiver for MX Air",                        "C-UB34",      1, 0, 1, 1, 0},
@@ -117,6 +119,7 @@ static void query_csr(mouse_t *m, struct usb_dev_handle *handle,
             case 0x3c: printf ("C508\n"); break;
             case 0x3d: printf ("C506\n"); break;
             case 0x3e: printf ("C505\n"); break;
+            case 0x3f: printf ("C50B\n"); break;
             case 0x42: printf ("C512\n"); break;
       default: printf ("Unknown (type %x)\n", P0);
       }
@@ -648,7 +651,7 @@ int scan_bus (struct usb_bus *bus) {
             /* Do we support this device? If so, list it. */
             if ((m = find_mouse (device)) != NULL) {
                   
-                  printf ("%s.%s: %04x:%04x %s (%s) Caps: %s%s%s\n",
+                  printf ("%s.%s: %04x:%04x %s (%s) Caps: %s%s%s%s\n",
                         device->bus->dirname,
                         device->filename,
                         device->descriptor.idVendor,
@@ -657,6 +660,7 @@ int scan_bus (struct usb_bus *bus) {
                         m->model,
                         m->has_csr? "CSR ": "",
                         m->has_res? "RES ": "",
+                        m->has_ssr? "SSR ": "",
                         m->has_sms? "SMS ": ""
                         );
             } else {
