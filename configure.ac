@@ -2,12 +2,12 @@
 # lomoco autoconf
 #
 # Process this file with autoconf to produce a configure script.
-AC_INIT()
 
 # lomoco version
-lomoco_VERSION=$(sed -n -e 's/lomoco .\([0-9]*.[0-9]*\)./\1/p' ChangeLog)
+m4_define([lomoco_VERSION], m4_esyscmd_s([sed -n -e '1s/lomoco .\([0-9]*.[0-9]*\)./\1/p' ChangeLog]))
 
-AM_INIT_AUTOMAKE(lomoco, $lomoco_VERSION)
+AC_INIT([lomoco], [lomoco_VERSION])
+AM_INIT_AUTOMAKE
 
 AC_CONFIG_SRCDIR([src/lomoco.c])
 AC_CONFIG_HEADER([config.h])
