@@ -659,32 +659,38 @@ int scan_bus (struct usb_bus *bus) {
                         m->has_res? "RES ": "",
                         m->has_sms? "SMS ": ""
                         );
-            }
-            else {
-                  
-                  handle = usb_open (device);   
-                  ret = usb_get_string_simple(  handle,
-                                          device->descriptor.iProduct,
-                                          product,
-                                          sizeof(product));
-                  (void) usb_close (handle);
-                  
-                  printf ("%s.%s: %04x:%04x Unsupported Logitech device: %s\n",
-                        device->bus->dirname,
-                        device->filename,
-                        device->descriptor.idVendor,
-                        device->descriptor.idProduct,
-                        ret > 0 ? product : "Unknown"
-                        );
+            } else {
+                  handle = usb_open (device);
+                  if (handle) {
+                      ret = usb_get_string_simple(handle,
+                                                  device->descriptor.iProduct,
+                                                  product,
+                                                  sizeof(product));
+                      (void) usb_close (handle);
+
+                      printf("%s.%s: %04x:%04x Unsupported Logitech device: %s\n",
+                              device->bus->dirname,
+                              device->filename,
+                              device->descriptor.idVendor,
+                              device->descriptor.idProduct,
+                              ret > 0 ? product : "Unknown");
+                  } else {
+                      printf("%s.%s: %04x:%04x Unsupported Logitech device (can't get product name, "
+                             "you probably don't have permissions to access this device)\n",
+                             device->bus->dirname,
+                             device->filename,
+                             device->descriptor.idVendor,
+                             device->descriptor.idProduct);
+                  }
                   continue;
             }
-            
+
             /* Run commands */
             if (command == cmd_inquire) query (m, device);
             if (command == cmd_set) configure (m, device);
 
       }
-      
+
       return 1;
 }
 
