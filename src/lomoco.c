@@ -669,7 +669,7 @@ int scan_bus (struct usb_bus *bus) {
                         device->filename,
                         device->descriptor.idVendor,
                         device->descriptor.idProduct,
-                        ret ? product : "Unknown"
+                        ret > 0 ? product : "Unknown"
                         );
                   continue;
             }
