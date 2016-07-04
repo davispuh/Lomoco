@@ -18,8 +18,8 @@ You'll need:
 
 ## Building with Autotools
 
-1. ./autogen.sh
-2. make
+1. `./autogen.sh`
+2. `make`
 
 ## Building with CMake
 
