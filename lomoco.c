@@ -55,6 +55,7 @@ mouse_t mice [] = {
       {0xc505, "Receiver for Cordless Elite Duo",            "C-BG17-DUAL", 1, 0, 0, 0, 1},
       {0xc506, "Receiver for MX700 Optical Mouse",           "C-BF16-MSE",  1, 0, 0, 1, 0},
       {0xc508, "Receiver for Cordless Optical TrackMan",     "C-BA4-MSE",   1, 0, 0, 1, 0},
+      {0xc525, "Receiver for MX Air",                        "C-UB34",      1, 0, 1, 1, 0},
       {0xc702, "Receiver for Cordless Presenter",            "C-UF15",      1, 0, 0, 0, 0},
       {0xc704, "Receiver for diNovo Media Desktop",          "C-BQ16A",     1, 0, 1, 1, 0},
       /* From Markus Wiesner <m_wiesner@gmx.net> */
