@@ -1,0 +1,60 @@
+
+### C ###
+# Object files
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.so
+*.so.*
+*.dylib
+
+### Autotools ###
+
+Makefile.in
+
+/autom4te.cache
+/autoscan.log
+/autoscan-*.log
+/aclocal.m4
+/compile
+/config.h.in
+/config.h.in~
+/config.h
+/config.log
+/config.status
+/configure
+/configure.scan
+/depcomp
+/install-sh
+/missing
+/stamp-h1
+/src/.deps
+
+### CMake ###
+
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Makefile
+cmake_install.cmake
+install_manifest.txt
+CTestTestfile.cmake
+
+
+### Our files ###
+
+/src/lomoco
+/src/lomoco.1
+/udev/lomoco.rules
+
