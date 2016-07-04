@@ -55,6 +55,7 @@ mouse_t mice [] = {
       {0xc505, "Receiver for Cordless Elite Duo",            "C-BG17-DUAL", 1, 0, 0, 0, 1},
       {0xc506, "Receiver for MX700 Optical Mouse",           "C-BF16-MSE",  1, 0, 0, 1, 0},
       {0xc508, "Receiver for Cordless Optical TrackMan",     "C-BA4-MSE",   1, 0, 0, 1, 0},
+      {0xc50a, "Receiver for Cordless Optical Mouse for Notebooks", "C-BJ27-MSE",  1, 0, 0, 1, 0},
       {0xc525, "Receiver for MX Air",                        "C-UB34",      1, 0, 1, 1, 0},
       {0xc702, "Receiver for Cordless Presenter",            "C-UF15",      1, 0, 0, 0, 0},
       {0xc704, "Receiver for diNovo Media Desktop",          "C-BQ16A",     1, 0, 1, 1, 0},
@@ -106,6 +107,7 @@ static void query_csr(mouse_t *m, struct usb_dev_handle *handle,
       printf("\tReceiver type: ");
       switch (P0) {
             case 0x0f: printf ("C50E\n"); break;
+            case 0x14: printf ("C50A\n"); break;
             case 0x38: printf ("C501\n"); break;
             case 0x39: printf ("C502\n"); break;
             case 0x3a: printf ("C503\n"); break;
@@ -140,6 +142,7 @@ static void query_csr(mouse_t *m, struct usb_dev_handle *handle,
             case 0x82: printf ("Cordless Optical TrackMan\n"); break;
             case 0x8A: printf ("MX700 Cordless Optical Mouse\n"); break;
             case 0x8B: printf ("MX700 Cordless Optical Mouse (2ch)\n"); break;
+            case 0x94: printf ("Cordless Optical Mouse for Notebooks\n"); break;
       default: printf ("Unknown (type %x)\n", P4);
       }
 
