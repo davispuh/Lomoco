@@ -48,6 +48,7 @@ mouse_t mice [] = {
       {0xc031, "iFeel Mouse (silver)",                       "M-UT58A",     0, 1, 0, 0, 0},
       {0xc041, "G5 Laser Gaming Mouse",                      "M-UAC113",    0, 1, 0, 1, 0},
       {0xc051, "MX518 Optical Mouse",                        "M-BS81A",     0, 1, 1, 0, 0},
+      {0xc069, "M500 Laser Mouse",                           "M-500",       0, 1, 1, 0, 0},
       {0xc501, "Mouse Receiver",                             "C-BA4-MSE",   1, 0, 0, 0, 0},
       {0xc502, "Dual Receiver",                              "C-UA3-DUAL",  1, 0, 0, 0, 1},
       {0xc503, "Receiver for MX900 Receiver",                "C-UJ16A",     1, 0, 0, 1, 0},
