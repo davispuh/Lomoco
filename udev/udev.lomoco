@@ -1,26 +1,24 @@
-#!/bin/bash
+#!/bin/sh
+#
+#  udev helper script for the locomo utility
+#
 
-case "$DEVPATH" in
-	*usbdev*.*)
-		dev=${DEVPATH##*usbdev}
-		bus=$(printf %03d ${dev%.*})
-		dev=$(printf %03d ${dev#*.})
+test -x /usr/bin/lomoco || exit 0
+test -r /etc/default/lomoco || exit 0
 
-		. /etc/sysconfig/logitech_mouse
+options=
+. /etc/default/lomoco
 
-		options=
+if [ -n "$LOGITECH_MOUSE_RESOLUTION" ]; then
+	options="--$LOGITECH_MOUSE_RESOLUTION"
+fi
 
-		if [ -n "$LOGITECH_MOUSE_RESOLUTION" ]; then
-			options="--$LOGITECH_MOUSE_RESOLUTION"
-		fi
+if [ -z "$LOGITECH_MOUSE_DISABLE_CC" -o "$LOGITECH_MOUSE_DISABLE_CC" = yes ]; then
+	options="$options --no-sms"
+fi
 
-		if [ -z "$LOGITECH_MOUSE_DISABLE_CC" -o "$LOGITECH_MOUSE_DISABLE_CC" = yes ]; then
-			options="$options --no-sms"
-		fi
-
-		if [ -n "$options" ]; then
-			/usr/bin/lomoco -b $bus -d $dev $options
-		fi
-	;;
-esac 2>&1 | /bin/logger -t lomoco
-
+if [ -n "$options" ]; then
+	/usr/bin/lomoco -b $BUSNUM -d $DEVNUM -p $ID_MODEL_ID $options 2>&1 |\
+		sed -e 's/^[[:blank:]]\+//' -e 's/ \+$//' -e '/^$/ d' |\
+		logger -t lomoco -p daemon.info
+fi
