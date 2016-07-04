@@ -1,0 +1,27 @@
+-I. 
++unixlib
++charindex
++charintliteral
+-realcompare
+-booltype bool
+-paramuse
+-predboolint
+-nestedextern
+
+-Dint8_t=char
+-Du_int8_t=uchar
+-Dint16_t=short
+-Du_int16_t=ushort
+-Dint32_t=int
+-Du_int32_t=uint
+-Dint64_t=long
+-Du_int64_t=ulong
+-Din_addr_t=int
+-Dcaddr_t=short
+-DPACKAGE=lomoco
+
+-DFD_SETSIZE=31
+-DB57600=010001
+-DB115200=0010011
+-DCRTSCTS=0x00020000
+-DONLCR=0x00000002

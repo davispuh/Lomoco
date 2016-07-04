@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC 
+   "-//OASIS//DTD DocBook XML V4.1.2//EN"
+      "docbook/docbookx.dtd"
+> 
+
+<refentry id='lomoco.1'>
+
+<refmeta>
+	<refentrytitle>lomoco</refentrytitle>
+	<manvolnum>1</manvolnum>
+	<refmiscinfo class='date'>28 Aug 2005</refmiscinfo>
+</refmeta>
+
+<refnamediv id='name'>
+	<refname>lomoco</refname>
+	<refpurpose>Logitech Mouse Control for USB Mice</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id='synopsis'>
+	<cmdsynopsis>
+		<command>lomoco</command>  
+	       	<arg choice='opt'><replaceable>OPTIONS</replaceable></arg>
+	</cmdsynopsis>
+</refsynopsisdiv>
+
+
+<refsect1 id='description'>
+	<title>DESCRIPTION</title>
+	<para>
+		<application>lomoco</application> can configure vendor-specific options on Logitech USB mice (or dual-personality mice plugged into the USB port). A number of recent devices are supported. The program is mostly useful in setting the resolution to 800 cpi or higher on mice that boot at 400 cpi (such as the MX500, MX510, MX1000 etc.), and disabling SmartScroll or Cruise Control for those who would rather use the two extra buttons as ordinary mouse buttons.
+	</para>
+
+	<para>
+		Hint 1: use a Linux kernel with Event Interface support (the evdev module) if you want full access to the numerous buttons on these mice.
+	</para>
+
+	<para>
+		Hint 2: on Linux, the usbmouse driver ignores the extra buttons altogether. Don't let it handle your Logitech mice -- use the generic hid driver for USB HID devices instead.
+	</para>
+</refsect1>
+
+
+
+<refsect1 id='exit_status'>
+	<title>EXIT STATUS</title>
+	<para>
+		An exit status of zero indicates successful termination. A non-zero exit status denotes abnormal termination due to an error.
+	</para>
+</refsect1>
+
+
+
+<refsect1 id='options'>
+	<title>OPTIONS</title>
+	<para>
+		<application>lomoco</application> accepts a number of arguments. The following arguments control which device is accessed or modified:
+	</para>
+
+<variablelist remap='TP'>
+	<varlistentry>
+		<term>-b, --bus=<replaceable>USB-BUS-NUMBER</replaceable></term>
+		<listitem>
+			<para>Only apply the command to the specified bus, specified in full (e.g. use -b 001 for bus 1). This is in the same format as reported by <application>lomoco</application> -s (the first column, on the left hand side of the period) or lsusb(1) (next to `Bus').</para>
+		</listitem>
+	</varlistentry>
+	
+	<varlistentry>	
+		<term>-d, --dev=<replaceable>USB-DEVICE-NUMBER</replaceable></term>
+		<listitem>
+			<para>
+				Only apply the command to the specified bus, specified in full (e.g. use -d 01b for device 27). This is in the same format as reported by <application>lomoco</application> -s (the first column, on the right hand side of the period) or lsusb(1) (next to `Device').
+			</para>
+		</listitem>
+	</varlistentry>
+	
+	<varlistentry>
+		<term>-p, --pid=<replaceable>USB-PRODUCT-ID</replaceable></term>
+		<listitem>
+			<para>
+				Only apply the command to the specified USB product ID, specified in hexadecimal and in full (e.g. use -p c025 for an MX-500 optical mouse). Again, you can use <application>lomoco</application> -s or lsusb(1) to get a listing of product IDs (the right hand side of tuples like 046d:xxxx).
+			</para>
+		</listitem>
+	</varlistentry>
+</variablelist>
+
+	<para>
+		The following generic actions can be performed:
+	</para>
+
+<variablelist remap='TP'>
+	<varlistentry>
+		<term>-i, --inquire</term>
+		<listitem>
+			<para>
+				Obtain and display the status of all supported capabilities for all matching devices.
+			</para>
+		</listitem>
+	</varlistentry>
+
+	<varlistentry>
+		<term>-s, --scan</term>
+		<listitem>
+			<para>
+				Scan the USB bus and report all matching, supported Logitech mice.
+			</para>
+		</listitem>
+	</varlistentry>
+</variablelist>
+
+	<para>
+		The following commands configure wireless receivers and mice with the CSR command set (use <application>lomoco</application> -s to see if yours supports it):
+	</para>
+
+<variablelist remap='TP'>
+	<varlistentry>
+		<term>-1, --ch1</term>
+		<listitem>
+			<para>
+				Set matching devices to channel 1. Please be aware that not all CSR-supporting devices are dual channel.
+			</para>
+		</listitem>
+	</varlistentry>
+	
+	<varlistentry>
+		<term>-2, --ch2</term>
+		<listitem>
+			<para>
+				Set matching devices to channel 2.
+			</para>
+		</listitem>
+	</varlistentry>
+
+	<varlistentry>
+		<term>-c, --clear</term>
+		<listitem>
+			<para>
+				Make all matching receivers forget about the mouse connected to it, just as if the "connect" button on the receiver had been pressed for three seconds.
+			</para>
+		</listitem>
+	</varlistentry>
+
+	<varlistentry>
+		<term>-l, --lock</term>
+		<listitem>
+			<para>
+				Stop the 30 second search for a wireless mouse on all matching receivers. This search is initiated using the -u option, or by pressing the "connect" button on the receiver.
+			</para>
+		</listitem>
+	</varlistentry>
+
+	<varlistentry>
+		<term>-u, --unlock</term>
+		<listitem>
+			<para>
+				Unlock all matching receivers and initiate a search for any wireless mouse in range. This is the same as pressing the "connect" button on the receiver.
+			</para>
+		</listitem>
+	</varlistentry>
+</variablelist>
+
+	<para>
+		The following settings control mouse resolution, for mice with 400, 800, 1200 and 1600 cpi support, and the RES capability.
+	</para>
+
+<variablelist remap='TP'>
+	<varlistentry>
+		<term>-4, --400</term>
+		<listitem>
+			<para>
+				Sets matching devices to a resolution of 400 cpi.
+			</para>
+		</listitem>
+	</varlistentry>
+
+	<varlistentry>
+		<term>-8, --800</term>
+		<listitem>
+			<para>
+				Sets matching devices to a resolution of 800 cpi. Very useful on certain Logitech mice (the MX500 is one of them) that boot in 400 cpi.
+			</para>
+		</listitem>
+	</varlistentry>
+
+	<varlistentry>
+		<term>-m, --1200</term>
+		<listitem>
+			<para>
+				Sets matching devices to a resolution of 1200 cpi. Very useful on certain Logitech mice (the MX518 is one of them) that boot in 400 cpi.
+			</para>
+		</listitem>
+	</varlistentry>
+
+	<varlistentry>
+		<term>-h, --1600</term>
+		<listitem>
+			<para>
+				Sets matching devices to a resolution of 1600 cpi. Very useful on certain Logitech mice (the MX518 is one of them) that boot in 400 cpi.
+			</para>
+		</listitem>
+	</varlistentry>
+	<varlistentry>
+		<term>-g, --2000</term>
+		<listitem>
+			<para>
+				Sets matching devices to a resolution of 2000 cpi. Very useful on certain Logitech mice (the G5 or G7) that boot in 400 cpi.
+			</para>
+		</listitem>
+	</varlistentry>
+
+</variablelist>
+
+	<para>
+		The following settings control SmartScroll/Cruise Control, for mice that support it (i.e. include the SMS capability).
+	</para>
+
+<variablelist remap='TP'>
+	<varlistentry>
+		<term>--no-sms</term>
+		<listitem>
+			<para>
+				Disable SmartScroll/Cruise Control an all matching mice. `Up' and `down' buttons do not also issue wheel events. Useful if you want to use the additional buttons for something else.
+			</para>
+		</listitem>
+	</varlistentry>
+
+	<varlistentry>
+		<term>--sms</term>
+		<listitem>
+			<para>
+				Enable SmartScroll/Cruise Control an all matching mice. `Up' and `down' buttons will now also issue wheel events (but will also issue their native button events, which user applications are expected to ignore). This is how most mice boot.
+			</para>
+		</listitem>
+	</varlistentry>
+</variablelist>
+
+	<para>
+		Other, miscellaneous options:
+	</para>
+
+<variablelist remap='TP'>
+	<varlistentry>
+		<term>-?, --help</term>
+		<listitem>
+			<para>
+				List all available options and their meanings.
+			</para>
+		</listitem>
+	</varlistentry>
+
+	<varlistentry>
+		<term>--usage</term>
+		<listitem>
+			<para>
+				Display brief usage information.
+			</para>
+		</listitem>
+	</varlistentry>
+
+	<varlistentry>
+		<term>-V, --version</term>
+		<listitem>
+			<para>
+				Show the program's version, credits and licensing.
+			</para>
+		</listitem>
+	</varlistentry>
+</variablelist>
+
+</refsect1>
+
+
+
+<refsect1 id='bugs'>
+	<title>REPORTING BUGS</title>
+	<para>
+		Report bugs to <email>lomoco-dev@lists.linux-gamers.net</email>
+		or #lomoco @ irc.freenode.net
+	</para>
+</refsect1>
+
+
+
+<refsect1 id='see_also'><title>SEE ALSO</title>
+	<para>
+		<citerefentry><refentrytitle>libusb</refentrytitle><manvolnum>1</manvolnum></citerefentry>
+	</para>
+</refsect1>
+
+
+
+<refsect1 id='maintainer'>
+	<title>AUTHORS</title>
+	<para>
+		Alexios Chouchoulas, Andreas Schneider, Peter Feuerer, Tobias Schleuss.
+		This manual page by Alexios Chouchoulas and Andreas Schneider <email>andreas.schneider@linux-gamers.net</email>.
+	</para>
+</refsect1>
+
+</refentry>

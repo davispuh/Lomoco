@@ -1,0 +1,9 @@
+lomoco (1.0)
+
+  * Update udev rules an script for latest version
+  * Added patch for the MX518, MX510, MX310, MX3100
+  * Added lomoco.xml manpage template
+  * Updated udev support, thanks to Ludwig Nussel
+  * Fixed memory leaks
+
+ -- Andreas Schneider <andreas.schneider@linux-gamers.net>  Wed Mar 01 15:05:38 CEST 2006

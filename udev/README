@@ -1,0 +1,27 @@
+		lomoco udev - Logitech Mouse Control with udev
+			
+			http://lomoco.linux-gamers.net
+
+
+UDEV
+	
+	Linux configurable dynamic device naming support
+	'man udev' for more informations
+
+DESCRIPTION
+
+	toudev.awk
+		awk script to create udev rules (make udev-rules) from the
+		mouse struct in lomoco.c. A file named lomoco.rules will be
+		created, suggested udev rules name is
+		/etc/udev/rules.d/40-lomoco.rules
+
+	udev.lomoco
+		Shell script to set the resolution or to disable Smart/Cruise
+		control on the logitech mouse. Copy it to
+		/lib/udev/lomoco
+
+THANKS
+	
+	Special thanks to Ludwig Nussel <lnussel@suse.de> and
+	Marco d'Itri <md@linux.it>for the scripts.

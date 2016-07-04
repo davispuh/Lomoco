@@ -1,0 +1,26 @@
+#!/bin/bash
+
+case "$DEVPATH" in
+	*usbdev*.*)
+		dev=${DEVPATH##*usbdev}
+		bus=$(printf %03d ${dev%.*})
+		dev=$(printf %03d ${dev#*.})
+
+		. /etc/sysconfig/logitech_mouse
+
+		options=
+
+		if [ -n "$LOGITECH_MOUSE_RESOLUTION" ]; then
+			options="--$LOGITECH_MOUSE_RESOLUTION"
+		fi
+
+		if [ -z "$LOGITECH_MOUSE_DISABLE_CC" -o "$LOGITECH_MOUSE_DISABLE_CC" = yes ]; then
+			options="$options --no-sms"
+		fi
+
+		if [ -n "$options" ]; then
+			/usr/bin/lomoco -b $bus -d $dev $options
+		fi
+	;;
+esac 2>&1 | /bin/logger -t lomoco
+

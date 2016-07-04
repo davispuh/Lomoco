@@ -1,0 +1,119 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.0).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "LOMOCO" "1" "09/08/2005" "28 Aug 2005" "28 Aug 2005"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+lomoco \- Logitech Mouse Control for USB Mice
+.SH "SYNOPSIS"
+.HP 7
+\fBlomoco\fR [\fIOPTIONS\fR]
+.SH "DESCRIPTION"
+.PP
+ lomoco 
+can configure vendor\-specific options on Logitech USB mice (or dual\-personality mice plugged into the USB port). A number of recent devices are supported. The program is mostly useful in setting the resolution to 800 cpi or higher on mice that boot at 400 cpi (such as the MX500, MX510, MX1000 etc.), and disabling SmartScroll or Cruise Control for those who would rather use the two extra buttons as ordinary mouse buttons.
+.PP
+Hint 1: use a Linux kernel with Event Interface support (the evdev module) if you want full access to the numerous buttons on these mice.
+.PP
+Hint 2: on Linux, the usbmouse driver ignores the extra buttons altogether. Don't let it handle your Logitech mice \-\- use the generic hid driver for USB HID devices instead.
+.SH "EXIT STATUS"
+.PP
+An exit status of zero indicates successful termination. A non\-zero exit status denotes abnormal termination due to an error.
+.SH "OPTIONS"
+.PP
+ lomoco 
+accepts a number of arguments. The following arguments control which device is accessed or modified:
+.TP
+\-b, \-\-bus=\fIUSB\-BUS\-NUMBER\fR
+Only apply the command to the specified bus, specified in full (e.g. use \-b 001 for bus 1). This is in the same format as reported by 
+lomoco 
+\-s (the first column, on the left hand side of the period) or lsusb(1) (next to `Bus').
+.TP
+\-d, \-\-dev=\fIUSB\-DEVICE\-NUMBER\fR
+Only apply the command to the specified bus, specified in full (e.g. use \-d 01b for device 27). This is in the same format as reported by 
+lomoco 
+\-s (the first column, on the right hand side of the period) or lsusb(1) (next to `Device').
+.TP
+\-p, \-\-pid=\fIUSB\-PRODUCT\-ID\fR
+Only apply the command to the specified USB product ID, specified in hexadecimal and in full (e.g. use \-p c025 for an MX\-500 optical mouse). Again, you can use 
+lomoco 
+\-s or lsusb(1) to get a listing of product IDs (the right hand side of tuples like 046d:xxxx).
+.PP
+The following generic actions can be performed:
+.TP
+\-i, \-\-inquire
+Obtain and display the status of all supported capabilities for all matching devices.
+.TP
+\-s, \-\-scan
+Scan the USB bus and report all matching, supported Logitech mice.
+.PP
+The following commands configure wireless receivers and mice with the CSR command set (use 
+lomoco 
+\-s to see if yours supports it):
+.TP
+\-1, \-\-ch1
+Set matching devices to channel 1. Please be aware that not all CSR\-supporting devices are dual channel.
+.TP
+\-2, \-\-ch2
+Set matching devices to channel 2.
+.TP
+\-c, \-\-clear
+Make all matching receivers forget about the mouse connected to it, just as if the "connect" button on the receiver had been pressed for three seconds.
+.TP
+\-l, \-\-lock
+Stop the 30 second search for a wireless mouse on all matching receivers. This search is initiated using the \-u option, or by pressing the "connect" button on the receiver.
+.TP
+\-u, \-\-unlock
+Unlock all matching receivers and initiate a search for any wireless mouse in range. This is the same as pressing the "connect" button on the receiver.
+.PP
+The following settings control mouse resolution, for mice with 400, 800, 1200 and 1600 cpi support, and the RES capability.
+.TP
+\-4, \-\-400
+Sets matching devices to a resolution of 400 cpi.
+.TP
+\-8, \-\-800
+Sets matching devices to a resolution of 800 cpi. Very useful on certain Logitech mice (the MX500 is one of them) that boot in 400 cpi.
+.TP
+\-m, \-\-1200
+Sets matching devices to a resolution of 1200 cpi. Very useful on certain Logitech mice (the MX518 is one of them) that boot in 400 cpi.
+.TP
+\-h, \-\-1600
+Sets matching devices to a resolution of 1600 cpi. Very useful on certain Logitech mice (the MX518 is one of them) that boot in 400 cpi.
+.TP
+\-g, \-\-2000
+Sets matching devices to a resolution of 2000 cpi. Very useful on certain Logitech mice (the G5 or G7) that boot in 400 cpi.
+.PP
+The following settings control SmartScroll/Cruise Control, for mice that support it (i.e. include the SMS capability).
+.TP
+\-\-no\-sms
+Disable SmartScroll/Cruise Control an all matching mice. `Up' and `down' buttons do not also issue wheel events. Useful if you want to use the additional buttons for something else.
+.TP
+\-\-sms
+Enable SmartScroll/Cruise Control an all matching mice. `Up' and `down' buttons will now also issue wheel events (but will also issue their native button events, which user applications are expected to ignore). This is how most mice boot.
+.PP
+Other, miscellaneous options:
+.TP
+\-?, \-\-help
+List all available options and their meanings.
+.TP
+\-\-usage
+Display brief usage information.
+.TP
+\-V, \-\-version
+Show the program's version, credits and licensing.
+.SH "REPORTING BUGS"
+.PP
+Report bugs to 
+<lomoco\-dev@lists.linux\-gamers.net> 
+or #lomoco @ irc.freenode.net
+.SH "SEE ALSO"
+.PP
+ \fBlibusb\fR(1)
+.SH "AUTHORS"
+.PP
+Alexios Chouchoulas, Andreas Schneider, Peter Feuerer, Tobias Schleuss. This manual page by Alexios Chouchoulas and Andreas Schneider 
+<andreas.schneider@linux\-gamers.net>.
