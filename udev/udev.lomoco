@@ -13,7 +13,7 @@ if [ -n "$LOGITECH_MOUSE_RESOLUTION" ]; then
 	options="--$LOGITECH_MOUSE_RESOLUTION"
 fi
 
-if [ -z "$LOGITECH_MOUSE_DISABLE_CC" -o "$LOGITECH_MOUSE_DISABLE_CC" = yes ]; then
+if [ -z "$LOGITECH_MOUSE_SMS" -o "$LOGITECH_MOUSE_SMS" = yes ]; then
 	options="$options --no-sms"
 fi
 
